@@ -1,2 +1,2 @@
-# lyapunov-orbits
-Numerically finding and analysing periodic orbits near the Earth-Moon L1 or L2 Lagrange point
+# l1-lyapunov-orbit
+Numerically computing a periodic orbit near the Earth–Moon L1 point
