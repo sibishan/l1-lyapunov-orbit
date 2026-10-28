@@ -12,7 +12,7 @@ def calc_l1(M1, M2, R):
     for bracket in brackets:
         roots.append(bisection(f,bracket[0], bracket[1], tol=1e-10))
 
-    return roots
+    return roots[0] # we know that only 1 root is present
 
 def calc_l2(M1, M2, R):
     def f(r):
@@ -26,4 +26,4 @@ def calc_l2(M1, M2, R):
     for bracket in brackets:
         roots.append(bisection(f,bracket[0], bracket[1], tol=1e-10))
 
-    return roots
+    return roots[0] # we know that only 1 root is present
