@@ -1,6 +1,8 @@
 import numpy as np
 
 from methods.interpolate import lagint
+from methods.roots import bracketing, bisection
+from cr3bp import int_cr3bp
 
 def find_crossing(t, s):
     for i in range(1, len(t) - 1): # we skip the initial point because the trajectory starts at y = 0
@@ -26,3 +28,25 @@ def find_crossing(t, s):
             return tc, sc
 
     return None, None
+
+def shooting_error(x0, mu, vy0):
+    # Integrate using the trial initial y velocity
+    t, s = int_cr3bp(x0, mu, vy0)
+
+    # Find the next y = 0 crossing
+    tc, sc = find_crossing(t, s)
+
+    if sc is None:
+        raise ValueError("No y = 0 crossing found")
+
+    return sc[2] # for a symmetric periodic orbit, vx = 0 at the crossing
+
+def find_initial_vy(x0, mu):
+    def wrap(vy0):
+        return shooting_error(x0, mu, vy0)
+
+    brackets = bracketing(wrap, 0.05, 0.15, n=20)
+
+    a, b = brackets[0]
+    vy0 = bisection(wrap, a, b, tol=1e-10)
+    return vy0
