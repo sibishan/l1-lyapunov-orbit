@@ -7,7 +7,7 @@ def calc_l1(M1, M2, R):
         rhs = (M1 / (M1 + M2) * R - r) * (M1 + M2) / R ** 3
         return lhs - rhs
 
-    brackets = bracketing(f,50000,60000, n=100)
+    brackets = bracketing(f,50000,60000, n=100) # we know the range to pick by graphing f(r)
 
     roots = []
     for bracket in brackets:
@@ -22,7 +22,7 @@ def calc_l2(M1, M2, R):
         rhs = (M1 / (M1 + M2) * R + r) * (M1 + M2) / R ** 3
         return lhs - rhs
 
-    brackets = bracketing(f,60000,70000, n=100)
+    brackets = bracketing(f,60000,70000, n=100) # we know the range to pick by graphing f(r)
 
     roots = []
     for bracket in brackets:
