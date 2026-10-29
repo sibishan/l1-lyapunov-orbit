@@ -46,7 +46,7 @@ def find_initial_vy(x0, mu):
     def wrap(vy0):
         return shooting_error(x0, mu, vy0)
 
-    brackets = bracketing(wrap, 0.05, 0.15, n=20)   # we search around the initial vy guess of 0.1 
+    brackets = bracketing(wrap, 0.05, 0.15, n=20)   # by trial and error, we searched around the initial vy guess of 0.1 
                                                     # for a sign change in the shooting error
     if brackets is None:
         raise ValueError("[find_initial_vy] no brackets found!")

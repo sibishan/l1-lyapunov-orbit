@@ -72,4 +72,3 @@ def test_rk4():
 test_bisection()
 test_lagrange()
 test_rk4()
-print("ALL TESTS PASSED")

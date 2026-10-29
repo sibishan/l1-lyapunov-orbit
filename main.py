@@ -29,7 +29,7 @@ print("Please wait around 30 seconds\n")
 vy0 = find_initial_vy(x0, MU)
 print("Correct initial vy = ", vy0)
 
-# Integrate with the corrected initial velocity
+# Integrate with the correct initial velocity
 t, s = int_cr3bp(x0, MU, vy0=vy0)
 
 # and find the half-period y = 0 crossing
