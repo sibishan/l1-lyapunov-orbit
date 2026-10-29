@@ -4,6 +4,7 @@ from methods.interpolate import lagint
 from methods.roots import bracketing, bisection
 from cr3bp import int_cr3bp
 
+# source: https://en.wikipedia.org/wiki/Shooting_method
 def find_crossing(t, s):
     for i in range(1, len(t) - 1): # we skip the initial point because the trajectory starts at y = 0
         y1 = s[i, 1]
@@ -14,7 +15,7 @@ def find_crossing(t, s):
             yp = np.array([[y1],[y2]])
             tp = np.array([[t[i]],[t[i + 1]]])
 
-            tc = lagint(0.0, yp, tp)
+            tc = lagint(0.0, yp, tp) # we use lagrange interpolation, instead of liner interpolation
 
             # interpolate the state at the crossing time
             times = np.array([[t[i]],[t[i + 1]]])
@@ -28,7 +29,6 @@ def find_crossing(t, s):
             return tc, sc
     return None, None
 
-# source: https://en.wikipedia.org/wiki/Shooting_method
 def shooting_error(x0, mu, vy0):
     # Integrate using the trial initial y velocity
     t, s = int_cr3bp(x0, mu, vy0)
