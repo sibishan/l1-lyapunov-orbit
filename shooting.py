@@ -47,6 +47,9 @@ def find_initial_vy(x0, mu):
 
     brackets = bracketing(wrap, 0.05, 0.15, n=20)
 
+    if brackets is None:
+        raise ValueError("No brackets found!")
+
     a, b = brackets[0]
     vy0 = bisection(wrap, a, b, tol=1e-14)
     return vy0

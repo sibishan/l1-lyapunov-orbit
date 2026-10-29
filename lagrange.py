@@ -9,11 +9,8 @@ def calc_l1(M1, M2, R):
 
     brackets = bracketing(f,50000,60000, n=100) # we know what range to pick by graphing f(r)
 
-    if len(brackets) > 1:
-        raise ValueError("calc_l1: there can only be 1 root here!")
+    if len(brackets) != 1: # there can be only 1 root
+        raise ValueError(f"[calc_l1] expected 1 root, found {len(brackets)}")
 
-    roots = []
-    for bracket in brackets:
-        roots.append(bisection(f,bracket[0], bracket[1], tol=1e-10))
-
-    return roots[0]
+    root = bisection(f,brackets[0][0], brackets[0][1], tol=1e-14)
+    return root

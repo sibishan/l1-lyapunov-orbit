@@ -5,12 +5,10 @@ from lagrange import calc_l1
 from cr3bp import int_cr3bp
 from shooting import find_initial_vy, find_crossing
 
-# CONFIGS
+# CONSTANTS
 M1 = 5.97217e24 # mass of earth (kg)
 M2 = 7.3458e22  # mass of moon (kg)
 R = 384400.0    # distance between earth and moom (km)
-
-# CONSTANTS
 MU = M2 / (M1 + M2) # mass ratio
 
 # PROCEDURE
@@ -25,7 +23,6 @@ print(f"Normalised L1 position = {xl1}")
 x0 = xl1 - 0.01 # Initial position slightly displaced from L1
 
 vy0 = find_initial_vy(x0, MU)
-
 print("correct initial vy = ", vy0)
 
 # Integrate trajectory
@@ -72,8 +69,8 @@ plt.scatter(1 - MU, 0, label="Moon")
 
 plt.xlabel("x")
 plt.ylabel("y")
-days = period * 4.34837740          # time unit in days
-plt.title(f"Planar Lyapunov orbit about Earth–Moon L1\nT = {period:.5f} ({days:.4f} days)")
+days = period * 4.34837740
+plt.title(f"A planar Lyapunov orbit about Earth–Moon L1 point\nwith period = {days:.4f} days")
 plt.axis("equal")
 plt.grid()
 plt.legend()
