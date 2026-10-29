@@ -1,4 +1,4 @@
-# L1 Lyapunov Orbit
+# A L1 Lyapunov Orbit
 
 Author: Sibishan Ravindran
 
