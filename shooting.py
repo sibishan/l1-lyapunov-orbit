@@ -26,9 +26,9 @@ def find_crossing(t, s):
                 sc[j] = lagint(tc, times, values)
 
             return tc, sc
-
     return None, None
 
+# source: https://en.wikipedia.org/wiki/Shooting_method
 def shooting_error(x0, mu, vy0):
     # Integrate using the trial initial y velocity
     t, s = int_cr3bp(x0, mu, vy0)
@@ -37,19 +37,20 @@ def shooting_error(x0, mu, vy0):
     tc, sc = find_crossing(t, s)
 
     if sc is None:
-        raise ValueError("No y = 0 crossing found")
+        raise ValueError("[shooting_error] No y = 0 crossing found!")
 
     return sc[2] # for a symmetric periodic orbit, vx = 0 at the crossing
 
+# Find the initial y-velocity that makes vx = 0 at the next y = 0 crossing
 def find_initial_vy(x0, mu):
     def wrap(vy0):
         return shooting_error(x0, mu, vy0)
 
-    brackets = bracketing(wrap, 0.05, 0.15, n=20)
-
+    brackets = bracketing(wrap, 0.05, 0.15, n=20)   # we search around the initial vy guess of 0.1 
+                                                    # for a sign change in the shooting error
     if brackets is None:
-        raise ValueError("No brackets found!")
+        raise ValueError("[find_initial_vy] no brackets found!")
 
-    a, b = brackets[0]
+    a, b = brackets[0] # we know that only 1 root is possible in this case
     vy0 = bisection(wrap, a, b, tol=1e-14)
     return vy0

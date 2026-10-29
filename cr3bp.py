@@ -16,13 +16,10 @@ def f(s, mu):
     return np.array([vx, vy, ax, ay])
 
 def int_cr3bp(x0, mu, vy0=0.1, tmax=10.0, h=0.001):
-    s0 = np.array([
-        x0,     # x
-        0.0,    # y
-        0.0,    # vx
-        vy0     # vy (our intial guess)
-        ])
+    s0 = np.array([x0, 0.0, 0.0, vy0]) # x, y, vx, vy
 
-    t, s = rk4solve(f, 0.0, s0, tmax, h, mu)
+    def wrap(s):
+        return f(s, mu)
 
+    t, s = rk4solve(wrap, 0.0, s0, tmax, h)
     return t, s
